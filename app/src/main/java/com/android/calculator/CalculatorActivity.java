@@ -23,7 +23,7 @@ public class CalculatorActivity extends AppCompatActivity {
         Button clickedButton = (Button) view;
         Log.e("calculator activity", "button was clicked");
         Log.e("result text view", result_tv.toString());
-        result_tv.setText(clickedButton.getText());
+        result_tv.append(clickedButton.getText());
     }
 
     String lhs = "";
@@ -57,9 +57,17 @@ public class CalculatorActivity extends AppCompatActivity {
         } else if (operator.equals("X")) {
             Double result = leftHandSide * rightHandSide;
             return result.toString();
-        } else {
+        } else if (operator.equals("/")) {
             Double result = leftHandSide / rightHandSide;
             return result.toString();
         }
+        return null;
+    }
+
+    public void onEqualClick(View view) {
+        String result = calculate(lhs, operator, result_tv.getText().toString());
+        result_tv.setText(result);
+        lhs = "";
+        operator = "";
     }
 }
